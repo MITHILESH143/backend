@@ -1,9 +1,9 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import multer from "multer";
 import xlsx from "xlsx";
 import dotenv from "dotenv";
+import connectDB from "./db/connection.js";
 import PostOffice from "./models/PostOfficeModel.js";
 
 dotenv.config();
@@ -12,9 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.error("MongoDB Error:", err));
+connectDB();
 
 // Multer setup for Excel uploads
 const storage = multer.diskStorage({
