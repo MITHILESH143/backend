@@ -14,7 +14,11 @@ export default function fileUploadForm() {
     formData.append("file", file);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/upload", formData);
+      const res = await axios.post("http://localhost:5000/api/upload", formData, {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+});
       setMessage(res.data.message + ` (${res.data.count} records)`);
     } catch (error) {
       setMessage(error.response?.data?.message || "Upload failed");
